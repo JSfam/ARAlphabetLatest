@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      aframe-injected=""
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,shrink-to-fit=no,user-scalable=no,minimal-ui"
+    />
+    <meta aframe-injected="" name="mobile-web-app-capable" content="yes" />
+    <meta
+      description="The letters and pictures of the alphabet are learned through Augmented Reality."
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@prashant_andani" />
+    <meta name="twitter:title" content="Web Augmented Reality" />
+    <meta
+      name="twitter:description"
+      content="The letters and pictures of the alphabet are learned through a marker based Web Augmented Reality."
+    />
+    <meta
+      name="twitter:image"
+      content="https://pbs.twimg.com/media/DR38gfuV4AU93yf.jpg"
+    />
+    <title>EduAR</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="script/aframe-ar.js"></script>
+  </head>
+
+  <body>
+    <main class="main">
+      <div id="splashScreen" class="AR-tip" style="display: none">
+        <p>
+          This is an Augmented Reality app for kids to learn Alphabet words with
+          fun. Scan the marker..
+          <a
+            style="white-space: nowrap"
+            class="links"
+            target="_blank"
+            href="https://github.com/prashant-andani/AR-Alphabets-words/blob/master/assets/pattern-letterG.png?raw=true"
+            >Get Marker Here</a
+          >
+        </p>
+        <a class="gotit" href="#">Got it!</a>
+      </div>
+      <!-- <div class="word-tip">
+        <div class="title"></div>
+      </div> -->
+
+      <!-- <div class="btns-wrap">
+        <div title="Rotate 360" class="btn rotate"></div>
+        <div title="Zoom in/out" class="btn scale"></div>
+        <div title="Previous Letter" class="btn prev custom-button"></div>
+        <div title="Next Letter" class="btn next custom-button"></div>
+        <div title="Speech Volume" id="volume" class="btn volume-up"></div>
+      </div> -->
+      <div class="AR-tip" id="noMedia" style="display: none"></div>
+    </main>
+
+    <a-scene
+      embedded
+      arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+      hidden
+    >
+      <a-assets>
+        <a-asset-item
+          id="apple_asset"
+          src="assets/apple_2/scene.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="ball_asset"
+          src="assets/basketball/scene.gltf"
+        ></a-asset-item>
+        <a-asset-item id="cat_asset" src="assets/cat/scene.gltf"></a-asset-item>
+        <a-asset-item id="dog_asset" src="assets/dog/scene.gltf"></a-asset-item>
+        <a-asset-item
+          id="eagle_asset"
+          src="assets/eagle/scene.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="flower_asset"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/flower/scene.gltf"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="goat_asset"
+          src="assets/goat/scene.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="goat_asset_obj"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/goat/Mesh_Goat.obj"
+        ></a-asset-item>
+        <a-asset-item
+          id="goat_asset_mtl"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/goat/Mesh_Goat.mtl"
+        ></a-asset-item>
+
+        <!-- <a-asset-item
+          id="headphone_asset"
+          src="assets/headphone/scene.gltf"
+        ></a-asset-item> -->
+        <a-asset-item
+          id="headphone_asset_mtl"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/headphone/1331%20HighEnd%20Headset.mtl"
+        ></a-asset-item>
+        <a-asset-item
+          id="headphone_asset_obj"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/headphone/1331%20HighEnd%20Headset.obj"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="iphone_asset"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/iphone/scene.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="jaguar_asset"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/jaguar/scene.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="kangaroo_asset"
+          src="assets/Kangaroo/scene.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="lion_asset"
+          src="assets/lion/scene.gltf"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="monkey_asset"
+          src="assets/monkey/scene.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="monkey_asset_obj"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/monkey/Monkey.obj"
+        ></a-asset-item>
+        <a-asset-item
+          id="monkey_asset_mtl"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/monkey/Monkey.mtl"
+        ></a-asset-item>
+        <a-asset-item
+          id="nest_asset_obj"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/nest/PUSHILIN_birds_nest.obj"
+        ></a-asset-item>
+        <a-asset-item
+          id="nest_asset_mtl"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/nest/PUSHILIN_birds_nest.mtl"
+        ></a-asset-item>
+        <a-asset-item
+          id="octopus_asset_obj"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/octopus/model.obj"
+        ></a-asset-item>
+        <a-asset-item
+          id="octopus_asset_mtl"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/octopus/materials.mtl"
+        ></a-asset-item>
+        <a-asset-item
+          id="parrot_asset"
+          src="assets/parrot/scene.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="qtip_asset_obj"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/qtip/CHAHIN_QTIP.obj"
+        ></a-asset-item>
+        <a-asset-item
+          id="qtip_asset_mtl"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/qtip/CHAHIN_QTIP.mtl"
+        ></a-asset-item>
+        <a-asset-item id="rat_asset" src="assets/rat/scene.gltf"></a-asset-item>
+        <a-asset-item
+          id="snake_asset"
+          src="assets/snake/model_Snake_20171107_154750887.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="telescope_asset_obj"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/telescope/model.obj"
+        ></a-asset-item>
+        <a-asset-item
+          id="telescope_asset_mtl"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/telescope/materials.mtl"
+        ></a-asset-item>
+        <a-asset-item
+          id="umbrella_asset_mtl"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/umbrella/NOVELO_OPENUMBRELLA.mtl"
+        ></a-asset-item>
+        <a-asset-item
+          id="umbrella_asset_obj"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/umbrella/NOVELO_OPENUMBRELLA.obj"
+        ></a-asset-item>
+        <a-asset-item
+          id="vase_asset"
+          src="assets/vase/scene.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="vase_asset_obj"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/vase/Vase.obj"
+        ></a-asset-item>
+        <a-asset-item
+          id="vase_asset_mtl"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/vase/Vase.mtl"
+        ></a-asset-item>
+        <a-asset-item
+          id="whale_asset"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/whale/scene.gltf"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="xmas_asset_obj"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/xmas/model.obj"
+        ></a-asset-item>
+        <a-asset-item
+          id="xmas_asset_mtl"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/xmas/materials.mtl"
+        ></a-asset-item>
+        <a-asset-item
+          id="yoyo_obj"
+          src="assets/yoyo/11713_yo-yo_v1_L3.obj"
+        ></a-asset-item>
+        <a-asset-item
+          id="yoyo_mtl"
+          src="assets/yoyo/11713_yo-yo_v1_L3.mtl"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="yacth_asset"
+          src="assets/yate/scene.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="zebra_asset_obj"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/zebra_obj/Zebra.obj"
+        ></a-asset-item>
+        <a-asset-item
+          id="zebra_asset_mtl"
+          src="https://raw.githubusercontent.com/prashant-andani/3d-models/master/zebra_obj/Zebra.mtl"
+        ></a-asset-item>
+      </a-assets>
+
+      <!-- <a-marker preset="custom" patterUrl="pattern-letterG.patt" url="pattern-letterG.patt" id="aframe-scene">
+      <a-entity light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"></a-entity>
+    </a-marker> -->
+
+      <!-- A  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerA.patt"
+        url="marker/pattern-markerA.patt"
+      >
+        <a-entity
+          gltf-model="#apple_asset"
+          position="0.3 0.1 -2"
+          scale="0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- B  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerB.patt"
+        url="marker/pattern-markerB.patt"
+      >
+        <a-entity
+          gltf-model="#ball_asset"
+          scale="0.30 0.30 0.30"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- C  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerC.patt"
+        url="marker/pattern-markerC.patt"
+      >
+        <a-entity
+          gltf-model="#cat_asset"
+          scale="2 2 2"
+          position="-0.1 -2 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- D  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerD.patt"
+        url="marker/pattern-markerD.patt"
+      >
+        <a-entity
+          gltf-model="#dog_asset"
+          scale="0.5 0.5 0.5"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- E  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerE.patt"
+        url="marker/pattern-markerE.patt"
+      >
+        <a-entity
+          gltf-model="#eagle_asset"
+          scale="0.2 0.2 0.2"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+      <!-- F  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerF.patt"
+        url="marker/pattern-markerF.patt"
+      >
+        <a-entity
+          gltf-model="#flower_asset"
+          scale="0.1 0.1 0.1"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- G  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerG.patt"
+        url="marker/pattern-markerG.patt"
+      >
+        <a-entity
+          gltf-model="#goat_asset"
+          scale="0.02 0.02 0.02"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- H  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerH.patt"
+        url="marker/pattern-markerH.patt"
+      >
+        <a-entity
+          obj-model="obj: #headphone_asset_obj; mtl: #headphone_asset_mtl"
+          scale="0.03 0.03 0.03"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- I  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerI.patt"
+        url="marker/pattern-markerI.patt"
+      >
+        <a-entity
+          gltf-model="#iphone_asset"
+          scale="0.6 0.6 0.6"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- J  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerJ.patt"
+        url="marker/pattern-markerJ.patt"
+      >
+        <a-entity
+          gltf-model="#jaguar_asset"
+          scale="0.02 0.02 0.02"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- K  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerK.patt"
+        url="marker/pattern-markerK.patt"
+      >
+        <a-entity
+          gltf-model="#kangaroo_asset"
+          scale="0.2 0.2 0.2"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- L  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerL.patt"
+        url="marker/pattern-markerL.patt"
+      >
+        <a-entity
+          gltf-model="#lion_asset"
+          scale="1.5 1.5 1.5"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 2.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- M  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerM.patt"
+        url="marker/pattern-markerM.patt"
+      >
+        <a-entity
+          gltf-model="#monkey_asset"
+          rotation="0 180 0"
+          scale="0.9 0.9 0.9"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 2.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- N  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerN.patt"
+        url="marker/pattern-markerN.patt"
+      >
+        <a-entity
+          obj-model="obj: #nest_asset_obj; mtl: #nest_asset_mtl"
+          scale="0.8 0.8 0.8"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- O  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerO.patt"
+        url="marker/pattern-markerO.patt"
+      >
+        <a-entity
+          obj-model="obj: #octopus_asset_obj; mtl: #octopus_asset_mtl"
+          rotation="0 180 0"
+          scale="1 1 1"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- P  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerP.patt"
+        url="marker/pattern-markerP.patt"
+      >
+        <a-entity
+          gltf-model="#parrot_asset"
+          scale="7 7 7"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- Q  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerQ.patt"
+        url="marker/pattern-markerQ.patt"
+      >
+        <a-entity
+          obj-model="obj: #qtip_asset_obj; mtl: #qtip_asset_mtl"
+          scale="3 3 3"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- R  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerR.patt"
+        url="marker/pattern-markerR.patt"
+      >
+        <a-entity
+          gltf-model="#rat_asset"
+          scale="0.3 0.3 0.3"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- S  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerS.patt"
+        url="marker/pattern-markerS.patt"
+      >
+        <a-entity
+          gltf-model="#snake_asset"
+          scale="0.03 0.03 0.03"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- T  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerT.patt"
+        url="marker/pattern-markerT.patt"
+      >
+        <a-entity
+          obj-model="obj: #telescope_asset_obj; mtl: #telescope_asset_mtl"
+          scale="1 1 1"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- U  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerU.patt"
+        url="marker/pattern-markerU.patt"
+      >
+        <a-entity
+          obj-model="obj: #umbrella_asset_obj; mtl: #umbrella_asset_mtl"
+          scale="0.01 0.01 0.01"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- V  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerV.patt"
+        url="marker/pattern-markerV.patt"
+      >
+        <a-entity
+          gltf-model="#vase_asset"
+          scale="15 15 15"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- W  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerW.patt"
+        url="marker/pattern-markerW.patt"
+      >
+        <a-entity
+          gltf-model="#whale_asset"
+          scale="0.7 0.7 0.7"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- X  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerX.patt"
+        url="marker/pattern-markerX.patt"
+      >
+        <a-entity
+          obj-model="obj: #xmas_asset_obj; mtl: #xmas_asset_mtl"
+          scale="2 2 2"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- Y -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerY.patt"
+        url="marker/pattern-markerY.patt"
+      >
+        <a-entity
+          gltf-model="#yacth_asset"
+          scale="0.03 0.03 0.03"
+          position=" 0.1 0.1 0.1"
+          rotation="0 -180 0"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+
+      <!-- Z  -->
+      <a-marker
+        preset="custom"
+        patterUrl="marker/pattern-markerZ.patt"
+        url="marker/pattern-markerZ.patt"
+      >
+        <a-entity
+          obj-model="obj: #zebra_asset_obj; mtl: #zebra_asset_mtl"
+          scale="0.15 0.15 0.15"
+          position=" 0.1 0.1 0.1"
+          light="type: hemisphere; color: #fefddd; groundColor: #fefddd; intensity: 1.2"
+        ></a-entity>
+      </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+    <script async src="main.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-111532782-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-111532782-1");
+    </script>
+  </body>
+</html>
